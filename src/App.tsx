@@ -1,26 +1,56 @@
 import React from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
+
 import './App.css';
 
-function App() {
+const apiBase = 'http://185.244.172.108:8081/';
+
+const eID = '52201';
+
+const mockData = {
+  equipmentCosts: 0,
+  estimatedProfit: 0,
+  machineOperatorSalary: 0,
+  mainCosts: 0,
+  materials: 0,
+  mimExploitation: 0,
+  overheads: 0,
+  parentId: 50743,
+  rowName: 'string1',
+  salary: 0,
+  supportCosts: 0
+} as IMock;
+
+const App = () => {
+  const getData = async () => {
+    const response = await axios.get(`${apiBase}/v1/outlay-rows/entity/${eID}/row/list`);
+    return response;
+  };
+
+  const createRow = async (row: IMock) => {
+    const response = await axios.post(`${apiBase}/v1/outlay-rows/entity/${eID}/row/create`, row);
+    return response;
+  };
+
+  const onCreateClick = async () => {
+    createRow(mockData).then((res) => console.log(res.data));
+  };
+
+  const onGetClick = async () => {
+    await getData().then((res) => console.log(res.data));
+  };
+
+  // useEffect(() => {
+  //   getData().then((res) => console.log(res.data));
+  //   // .then((res) => console.log(res.child));
+  // }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <button onClick={onGetClick}>Get data</button>
+      <button onClick={onCreateClick}>Create Row</button>
     </div>
   );
-}
+};
 
 export default App;
