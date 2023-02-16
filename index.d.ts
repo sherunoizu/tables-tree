@@ -1,4 +1,4 @@
-interface IMock {
+interface ITable {
   equipmentCosts: number;
   estimatedProfit: number;
   machineOperatorSalary: number;
@@ -10,4 +10,24 @@ interface IMock {
   rowName: string;
   salary: number;
   supportCosts: number;
+  child?: ITable[];
+  id: number;
+}
+
+interface ITableContextProps {
+  tables: ITable[];
+  getDataList: () => void;
+}
+
+interface ITableProviderProps {
+  children: React.ReactNode;
+}
+
+type IInitialState = {
+  title: string;
+  data: ITable[];
+};
+
+interface INavigationItemProps {
+  title: string;
 }

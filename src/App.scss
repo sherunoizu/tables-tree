@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+}
+
+
+.grid-items {
+  border: 1px solid #414144;
+  &-wl-wr {
+    border-left: 0px;
+    border-right: 0px;
+  }
+  &-r{
+    border-right: 1px solid #414144;
+    background-color: #27272A;
+    height: calc(100vh - 100px);
+  }
+}

@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  margin: 10px 24px;
+}
+
+.navigation {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.accordion {
+  
+  margin: 8px 20px;
+  p {
+    text-align: left;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #A1A1AA;
+    margin-bottom: 3px;
+  }
+}
+

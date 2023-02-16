@@ -1,56 +1,44 @@
 import React from 'react';
-import axios from 'axios';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
-import './App.css';
+import { Grid } from '@mui/material';
 
-const apiBase = 'http://185.244.172.108:8081/';
+// import { Table } from './components/Table';
+import { Header } from './components/Header';
+import { NavigationBar } from './components/NavigationBar';
+import { MainContent } from './components/MainContent';
 
-const eID = '52201';
+import { TableProvider } from './context';
 
-const mockData = {
-  equipmentCosts: 0,
-  estimatedProfit: 0,
-  machineOperatorSalary: 0,
-  mainCosts: 0,
-  materials: 0,
-  mimExploitation: 0,
-  overheads: 0,
-  parentId: 50743,
-  rowName: 'string1',
-  salary: 0,
-  supportCosts: 0
-} as IMock;
+import './App.scss';
 
-const App = () => {
-  const getData = async () => {
-    const response = await axios.get(`${apiBase}/v1/outlay-rows/entity/${eID}/row/list`);
-    return response;
-  };
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark'
+  }
+});
 
-  const createRow = async (row: IMock) => {
-    const response = await axios.post(`${apiBase}/v1/outlay-rows/entity/${eID}/row/create`, row);
-    return response;
-  };
-
-  const onCreateClick = async () => {
-    createRow(mockData).then((res) => console.log(res.data));
-  };
-
-  const onGetClick = async () => {
-    await getData().then((res) => console.log(res.data));
-  };
-
-  // useEffect(() => {
-  //   getData().then((res) => console.log(res.data));
-  //   // .then((res) => console.log(res.child));
-  // }, []);
-
-  return (
-    <div className='App'>
-      <button onClick={onGetClick}>Get data</button>
-      <button onClick={onCreateClick}>Create Row</button>
-    </div>
-  );
-};
+const App = () => (
+  <ThemeProvider theme={darkTheme}>
+    <TableProvider>
+      <CssBaseline />
+      <div className='App'>
+        <Grid container>
+          <Grid item xs={12}>
+            <Header />
+          </Grid>
+          <Grid item xs={2} className='grid-items-r '>
+            <NavigationBar />
+          </Grid>
+          <Grid item xs={10}>
+            <MainContent />
+          </Grid>
+        </Grid>
+        {/* <Table /> */}
+      </div>
+    </TableProvider>
+  </ThemeProvider>
+);
 
 export default App;
