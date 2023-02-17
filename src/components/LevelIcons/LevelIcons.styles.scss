@@ -1,0 +1,81 @@
+.icon-container-parent {
+  position: relative;
+
+  .connect-line {
+    position: absolute;
+    &::after,
+    &::before {
+      box-sizing: border-box;
+    }
+    &::after {
+      // content: '';
+      width: 1px;
+      height: 45px;
+      position: absolute;
+      top: 21px;
+      left: -13px;
+      background-color: #c6c6c6;
+    }
+  }
+}
+
+.icon-container-child {
+  position: relative;
+
+  .icon {
+    z-index: 10;
+  }
+
+  .connect-line {
+    position: absolute;
+    z-index: 1;
+    &::after,
+    &::before {
+      box-sizing: border-box;
+    }
+
+    &::after {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 13px;
+      height: 1px;
+      top: -14px;
+      left: -9px;
+      background-color: #c6c6c6;
+    }
+    &::before {
+      z-index: 1;
+      content: '';
+      width: 1px;
+      height: 61px;
+      position: absolute;
+      top: -74px;
+      left: -10px;
+      background-color: #c6c6c6;
+    }
+  }
+}
+
+.hovered {
+  background-color: #414144;
+  transition: all 0.4s;
+}
+
+.delete {
+  opacity: 0;
+  cursor: pointer;
+}
+
+.hovered-delete {
+  opacity: 1;
+}
+
+.icons-layout {
+  width: 55px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

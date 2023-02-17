@@ -19,19 +19,18 @@ export const useTableService = () => {
     return response;
   };
 
-  return { getId, getData, createRow };
-};
+  const updateRow = async (row: ITable) => {
+    const response = await axios.post(`${apiBase}/v1/outlay-rows/entity/${eID}/row/create`, row);
+    return response;
+  };
 
-// const mockData = {
-//   equipmentCosts: 0,
-//   estimatedProfit: 0,
-//   machineOperatorSalary: 0,
-//   mainCosts: 0,
-//   materials: 0,
-//   mimExploitation: 0,
-//   overheads: 0,
-//   parentId: 50743,
-//   rowName: 'string1',
-//   salary: 0,
-//   supportCosts: 0
-// } as IMock;
+  const deleteRow = async (row: number) => {
+    const rID = row;
+    const response = await axios.delete(
+      `${apiBase}/v1/outlay-rows/entity/${eID}/row/${rID}/delete`
+    );
+    return response;
+  };
+
+  return { getId, getData, createRow, deleteRow, updateRow };
+};

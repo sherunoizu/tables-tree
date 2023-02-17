@@ -2,16 +2,19 @@
   text-align: center;
 }
 
-
 .grid-items {
   border: 1px solid #414144;
   &-wl-wr {
     border-left: 0px;
     border-right: 0px;
   }
-  &-r{
+  &-r {
     border-right: 1px solid #414144;
-    background-color: #27272A;
+    background-color: #27272a;
     height: calc(100vh - 100px);
   }
+}
+
+.table-container {
+  background-color: #202124;
 }

@@ -2,5 +2,8 @@ import { createContext } from 'react';
 
 export const TableContext = createContext<ITableContextProps>({
   tables: [],
-  getDataList: () => {}
+  getDataList: () => {},
+  deleteTableRow: () => {},
+  projectTitle: '',
+  setTitle: () => {}
 });

@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import { Grid } from '@mui/material';
 
-// import { Table } from './components/Table';
+import { Table } from './components/Table';
 import { Header } from './components/Header';
 import { NavigationBar } from './components/NavigationBar';
 import { MainContent } from './components/MainContent';
@@ -31,11 +31,12 @@ const App = () => (
           <Grid item xs={2} className='grid-items-r '>
             <NavigationBar />
           </Grid>
-          <Grid item xs={10}>
-            <MainContent />
+          <Grid item xs={10} className='table-container'>
+            <MainContent>
+              <Table />
+            </MainContent>
           </Grid>
         </Grid>
-        {/* <Table /> */}
       </div>
     </TableProvider>
   </ThemeProvider>
