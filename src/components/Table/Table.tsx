@@ -17,13 +17,17 @@ export const Table = () => {
   return (
     <TableBody>
       <Routes>
-        <Route path='/'/>
-        {tables.map((table) => (
-           table.child && <Route
-            path={`/${table.id}`}
-            element={<TableRow key={table.id} node={table} />}
-          />
-        ))}
+        <Route path='/' element={<div>Выберите проект</div>}/>
+        {tables.map(
+          (table) =>
+            table.child && (
+              <Route
+                key={table.id}
+                path={`/${table.id}`}
+                element={<TableRow key={table.id} node={table} />}
+              />
+            )
+        )}
       </Routes>
     </TableBody>
   );

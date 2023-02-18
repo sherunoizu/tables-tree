@@ -15,10 +15,14 @@ interface ITable {
   id: number;
 }
 
+type IUpdateTable = Omit<ITable, 'id', 'child', 'total', 'parentId'>;
+
 interface ITableContextProps {
   tables: ITable[];
   getDataList: () => void;
   deleteTableRow: (row: number) => void;
+  createTableRow: (row: IUpdateTable) => Promise<any>;
+  updateTableRow: (row: IUpdateTable, rID: number) => void;
   projectTitle: string;
   setTitle: (title: string) => void;
 }
@@ -40,10 +44,17 @@ type ILevelIconsMode = {
   mode: 'parent' | 'child';
   pad: number;
   rowID: number;
+  isEdit: boolean;
 };
 
 interface ITableRowProps {
   node: ITable;
   pad?: number;
   mode?: 'parent' | 'child';
+}
+
+interface ITableCells {
+  table: ITable;
+  isEdit: boolean;
+  toggleEditMode: () => void;
 }

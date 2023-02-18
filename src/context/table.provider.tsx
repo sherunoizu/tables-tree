@@ -11,7 +11,7 @@ export const TableProvider: React.FC<ITableProviderProps> = ({ children }) => {
 
   const [projectTitle, setProjectTitle] = useState('');
 
-  const { getData, deleteRow } = useTableService();
+  const { getData, deleteRow, createRow, updateRow } = useTableService();
 
   const setTitle = (title: string) => {
     setProjectTitle(title);
@@ -26,13 +26,27 @@ export const TableProvider: React.FC<ITableProviderProps> = ({ children }) => {
     deleteRow(row).then(getDataList);
   };
 
+  const createTableRow = (row: IUpdateTable) => {
+    const response = createRow(row).then((res) => res.data);
+
+    getDataList();
+
+    return response;
+  };
+
+  const updateTableRow = (row: IUpdateTable, rID: number) => {
+    updateRow(row, rID).then(getDataList);
+  };
+
   const value = useMemo(
     () => ({
       tables,
       getDataList,
+      deleteTableRow,
+      createTableRow,
+      updateTableRow,
       projectTitle,
-      setTitle,
-      deleteTableRow
+      setTitle
     }),
     [tables, projectTitle]
   );

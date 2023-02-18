@@ -6,16 +6,24 @@ import { Button, Box } from '@mui/material';
 import { NavigationItem } from './NavigationItem';
 
 import { useTables } from '../../hooks';
+import { useTableService } from '../../service';
 
 import './NavigationBar.styles.scss';
 
 export const NavigationBar = () => {
-  const { tables, setTitle } = useTables();
+  const { tables, setTitle, createTableRow } = useTables();
+  const { DEFAULT_ROW } = useTableService();
 
-  const onProjectTitleClickHandler = (
-    title: string
-  ) => {
+  const onProjectTitleClickHandler = (title: string) => {
     setTitle(title);
+  };
+
+  const onCreateHandler = () => {
+    const data = createTableRow({ ...DEFAULT_ROW, parentId: null });
+
+    data.then((res) => {
+      createTableRow({ ...DEFAULT_ROW, parentId: res.current.id });
+    });
   };
 
   return (
@@ -24,6 +32,7 @@ export const NavigationBar = () => {
         {tables.map((table) => (
           <Link
             to={`/${table.id}`}
+            key={table.id}
             className='navigation-link'
             onClick={() => onProjectTitleClickHandler(`${table.id}`)}
           >
@@ -31,7 +40,9 @@ export const NavigationBar = () => {
           </Link>
         ))}
       </Box>
-      <Button variant='outlined'>Новый проект</Button>
+      <Button onClick={onCreateHandler} variant='outlined'>
+        Новый проект
+      </Button>
     </Box>
   );
 };

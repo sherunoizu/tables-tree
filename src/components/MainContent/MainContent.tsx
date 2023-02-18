@@ -23,6 +23,7 @@ export const MainContent: React.FC<ITableProviderProps> = ({ children }) => {
           (key) =>
             key !== 'id' &&
             key !== 'rowName' &&
+            key !== 'total' &&
             key !== 'child' &&
             key !== 'mimExploitation' &&
             key !== 'machineOperatorSalary' &&
@@ -35,14 +36,16 @@ export const MainContent: React.FC<ITableProviderProps> = ({ children }) => {
   }, [tables]);
 
   return (
-    <TableContainer component={Box} >
+    <TableContainer component={Box}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
           <TableRow>
             <TableCell>Level</TableCell>
             <TableCell align='center'>rowName</TableCell>
             {cellNames.map((key) => (
-              <TableCell align='right'>{key}</TableCell>
+              <TableCell align='center' key={key}>
+                {key}
+              </TableCell>
             ))}
           </TableRow>
         </TableHead>

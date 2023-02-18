@@ -19,8 +19,11 @@ export const useTableService = () => {
     return response;
   };
 
-  const updateRow = async (row: ITable) => {
-    const response = await axios.post(`${apiBase}/v1/outlay-rows/entity/${eID}/row/create`, row);
+  const updateRow = async (row: ITable, rID: number) => {
+    const response = await axios.post(
+      `${apiBase}/v1/outlay-rows/entity/${eID}/row/${rID}/update`,
+      row
+    );
     return response;
   };
 
@@ -32,5 +35,20 @@ export const useTableService = () => {
     return response;
   };
 
-  return { getId, getData, createRow, deleteRow, updateRow };
+  const DEFAULT_ROW = {
+    equipmentCosts: 0,
+    estimatedProfit: 0,
+    machineOperatorSalary: 0,
+    mainCosts: 0,
+    materials: 0,
+    mimExploitation: 0,
+    overheads: 0,
+    parentId: 0,
+    rowName: '',
+    salary: 0,
+    total: 0,
+    supportCosts: 0
+  };
+
+  return { getId, getData, createRow, deleteRow, updateRow, DEFAULT_ROW };
 };

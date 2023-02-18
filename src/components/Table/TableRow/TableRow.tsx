@@ -1,27 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { TableRow as MUITableRow, TableCell } from '@mui/material';
 
 import { LevelIcons } from '../../LevelIcons';
+import { TableCells } from '../TableCells';
 
 import { useTables } from '../../../hooks';
 
 export const TableRow: React.FC<ITableRowProps> = ({ node, pad = -20, mode = 'parent' }) => {
   const { projectTitle } = useTables();
 
+  const edit = !node.rowName;
+
+  const [isEdit, setIsEdit] = useState(edit);
+
+  const toggleEditMode = () => {
+    setIsEdit(() => !isEdit);
+  };
+
   return (
     <>
       {projectTitle !== `${node.id}` && (
-        <MUITableRow className={`anime ${node.id}`}>
-          <TableCell component='th'>
-            <LevelIcons mode={mode} pad={pad} rowID={node.id} />
+        <MUITableRow className={`${node.id}`} onDoubleClick={() => toggleEditMode()}>
+          <TableCell>
+            <LevelIcons mode={mode} pad={pad} rowID={node.id} isEdit={isEdit}/>
           </TableCell>
-          <TableCell align='center'>{node.rowName}</TableCell>
-          <TableCell align='right'>{node.total}</TableCell>
-          <TableCell align='right'>{node.salary}</TableCell>
-          <TableCell align='right'>{node.materials}</TableCell>
-          <TableCell align='right'>{node.mainCosts}</TableCell>
-          <TableCell align='right'>{node.overheads}</TableCell>
+          <TableCells table={node} isEdit={isEdit} toggleEditMode={toggleEditMode} />
         </MUITableRow>
       )}
       {node.child &&
