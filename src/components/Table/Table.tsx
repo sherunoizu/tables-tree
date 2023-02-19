@@ -7,6 +7,8 @@ import { useTables } from '../../hooks';
 
 import { TableRow } from './TableRow';
 
+import './Table.styles.scss';
+
 export const Table = () => {
   const { tables, getDataList } = useTables();
 
@@ -17,7 +19,14 @@ export const Table = () => {
   return (
     <TableBody>
       <Routes>
-        <Route path='/' element={<div>Выберите проект</div>}/>
+        <Route
+          path='/'
+          element={
+            <tr className='choose'>
+              <td>Выберите проект</td>
+            </tr>
+          }
+        />
         {tables.map(
           (table) =>
             table.child && (

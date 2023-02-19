@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import {
-  Box,
-  Table,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow
-  // Paper
-} from '@mui/material';
+import { Box, Table, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 import { useTables } from '../../hooks';
 
