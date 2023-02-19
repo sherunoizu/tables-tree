@@ -23,19 +23,20 @@ export const TableRow: React.FC<ITableRowProps> = ({ node, pad = -20, mode = 'pa
       {projectTitle !== `${node.id}` && (
         <MUITableRow className={`${node.id}`} onDoubleClick={() => toggleEditMode()}>
           <TableCell>
-            <LevelIcons mode={mode} pad={pad} rowID={node.id} isEdit={isEdit}/>
+            <LevelIcons mode={mode} pad={pad} rowID={node.id} isEdit={isEdit} />
           </TableCell>
           <TableCells table={node} isEdit={isEdit} toggleEditMode={toggleEditMode} />
         </MUITableRow>
       )}
       {node.child &&
-        node.child.map((childNode) =>
-          projectTitle !== `${node.id}` ? (
-            <TableRow node={childNode} pad={pad + 22} mode='child' key={childNode.id} />
-          ) : (
-            <TableRow node={childNode} pad={pad + 22} mode='parent' key={childNode.id} />
-          )
-        )}
+        node.child.map((childNode) => (
+          <TableRow
+            node={childNode}
+            pad={pad + 22}
+            mode={projectTitle !== `${node.id}` ? 'child' : 'parent'}
+            key={childNode.id}
+          />
+        ))}
     </>
   );
 };
